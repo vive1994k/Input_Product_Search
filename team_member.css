@@ -1,0 +1,23 @@
+.form-group label {
+    width:250px;
+    margin-top: 3px;
+    display:inline-block;
+    float:left;
+    padding:3px;
+}
+.form-group input {
+    height:20px; 
+    width:220px; 
+    padding:5px 8px;
+}
+.btn {
+	margin-top: 10px;
+	margin-bottom: 10px;
+    width: 150px;
+}
+#TeamList {
+	-webkit-appearance: button;
+	text-transform: uppercase;
+	width: 100px;
+	height: 30px;
+}
