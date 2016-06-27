@@ -24,33 +24,30 @@ var IsNameCorrect = function(name){
 	else
 		return true;
 };
-//Getting List of teams
-var Getlist = function(){
-	var url = "http://www-adiga.practodev.com/teams?key=b42b5ee6-385b-11e6-ac61-9e71128cae77&q=sample&rel=true";
-	$.get(url, function(data){
-		//console.log(typeof(JSON.parse(data)));
-		var T_list = JSON.parse(data);
-		console.log(typeof(JSON.stringify(T_list)));
-		console.log(typeof(T_list.payload.teams));
-		return (T_list.payload.teams);
-	});
-};
-//Updating List of teams
+//Getting List of teams And Updating List of teams
 $(document).ready(function(){
-	var optionList = Getlist();
-	//select  = $("#TeamList");
-    //select.empty();
-    for(var i=0;i<optionList.length;i++){
-		//console.log(typeof(optionlist[i].name));
-		console.log(optionList[i].id);
-		console.log(optionList[i].name);
-		var options=('<option value="' + optionList[i].id+ '">' + optionList[i].name + '</option>');
-		console.log(options);
-		$("#TeamList").append(options);
-		//select.append(options);
-		console.log(options);
-	}
+    var url = "http://139.59.3.93:8080/teams?key=b42b5ee6-385b-11e6-ac61-9e71128cae77";
+    
+    $.ajax({
+        url: url,
+        type: 'get',
+        dataType:"json",
+        success: function(data){
+            console.log(data);
+            var T_list = data;
+            var optionList = T_list.payload.teams;
+            for(var i=0;i<optionList.length;i++){
+                var options=('<option value="' + optionList[i].id+ '">' + optionList[i].name + '</option>');
+                $("#TeamList").append(options);
+            }
+        },
+        error: function(data){
+            console.log('error' + data);
+        }
+
+    });
 });
+
 //Function for Creating New Team
 var postTeam = function(){
     var teamId = document.getElementById("teamId").value;

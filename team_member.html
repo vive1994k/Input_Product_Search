@@ -20,7 +20,7 @@
 				<h4>Pre Existing List Of Teams:</h4>
 			</div>
 			<div class="col-md-8">
-				<select id="TeamList">
+				<select id="TeamList" onload= "Getlist()">
 					<option value="List">List</option>
 				</select>
 			</div>
@@ -53,19 +53,19 @@
 				      		</div>
 				      		<div class="form-group">
 								<label for="SrEngMan">Senior Engineering Manager:</label>
-								<input type="text" id="SrEngMan" name="SEM" required/>
+								<input type="integer" id="SrEngMan" name="SEM"/>
 				      		</div>
 				      		<div class="form-group">
 								<label for="EngMan">Engineering Manager:</label>
-								<input type="text" id="EngMan" name="EM" required/>
+								<input type="integer" id="EngMan" name="EM"/>
 				      		</div>
 				      		<div class="form-group">
 								<label for="teamLead">Team Lead:</label>
-								<input type="text" id="teamLead" name="TL" required/>		      		
+								<input type="integer" id="teamLead" name="TL"/>		      		
 							</div>
 							<div class="form-group">
-								<label for="projectManager">Prject Manager:</label>
-								<input type="text" id="projectManager" name="PM" required/>		      		
+								<label for="projectManager">Project Manager:</label>
+								<input type="integer" id="projectManager" name="PM"/>		      		
 							</div>
 						</div>
 					    <div class="modal-footer">
