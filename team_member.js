@@ -10,7 +10,6 @@ var IsValidMobile = function(mobNo) {
 };
 //Name Validator
 var IsValidName = function(name){
-    //var nameregex = /^[a-z]([-']?[a-z]+)*( [a-z]([-']?[a-z]+)*)+$/i;
     var nameregex = /^[a-z ,.'-]+$/i;
     if (name.length > 36){
         alert("Name too big");
@@ -43,14 +42,12 @@ $(document).ready(function(){
             console.log(data);
             var T_list = data;
             var optionList = T_list.payload.teams;
-            // Locally storing list of teams
-            //localStorage.setItem('locallyStoredTeams',JSON.stringify(optionList));
-            //console.log(JSON.parse(localStorage.getItem('locallyStoredTeams')));
             for(var i=0;i<optionList.length;i++){
                 var options=('<option value="' + optionList[i].id+ '">' + optionList[i].name + '</option>');
                 $("#TeamList").append(options);
                 $("#deleteTeamName").append(options);
                 $("#empteamName").append(options);
+                $("#update_teamName").append(options);
             }
         },
         error: function(data){
@@ -70,22 +67,24 @@ $(document).ready(function(){
             var empResponse = data;
             var empList = empResponse.payload.employees;
             console.log(empList.length);
-            //Locally storing list of employees 
-            //localStorage.setItem('locallyStoredEmployees',JSON.stringify(empList));
             for(var i=0;i<empList.length;i++) {
                 var options=('<option value="' + empList[i].id+ '">' + empList[i].name + '</option>');
                 $("#deleteProfileName").append(options);
                 if(empList[i].role === 'SEM') {
                     $("#SrEngManList").append(options);
+                    $("#update_SrEngManList").append(options);
                 }
                 else if(empList[i].role === 'EM') {
                     $("#EngManList").append(options);
+                    $("#update_EngManList").append(options);                    
                 }
                 else if(empList[i].role === 'TL') {
                     $("#teamLeadList").append(options);
+                    $("#update_teamLeadList").append(options);
                 }
                 else if(empList[i].role === 'PM') {
                     $("#projectManagerList").append(options);
+                    $("#update_projectManagerList").append(options);
                 }
             }
         },
@@ -103,40 +102,80 @@ var postTeam = function() {
             name: teamName
         }
         var pointOfContact = document.getElementById("pointOfContact").value;
-        if(pointOfContact){
-            JSONObject['pointOfContact'] = pointOfContact;
-        }
-        var SrEngMan = document.getElementById("SrEngManList").value;
-        if(SrEngMan) {
-            JSONObject['SEM'] = SrEngMan;
-        }
-        var EngMan = document.getElementById("EngManList").value;
-        if(EngMan) {
-            JSONObject['EM'] = EngMan;
-        }
-        var teamLead = document.getElementById("teamLeadList").value;
-        if(teamLead) {
-            JSONObject['TL'] = teamLead;
-        }
-        var projectManager =  document.getElementById("projectManagerList").value;
-        if(projectManager) {
-            JSONObject['PM'] = projectManager;
-        }
-        console.log(JSONObject);
-        //console.log(JSON);
-        var result = $.ajax({
-            url:"http://139.59.3.93:8080/teams?key=b42b5ee6-385b-11e6-ac61-9e71128cae77",
-            type:"post",
-            data: JSONObject,
-            success: function (data) {
-                console.log(data);
-            },
-            error: function(xhr, error, data ) {
-                console.log(xhr, error, data);
+        if(pointOfContact) {
+            if(IsValidemail(pointOfContact)) {
+                JSONObject['pointOfContact'] = pointOfContact;
+                var SrEngMan = document.getElementById("SrEngManList").value;
+                if(SrEngMan) {
+                    JSONObject['SEM'] = SrEngMan;
+                }
+                var EngMan = document.getElementById("EngManList").value;
+                if(EngMan) {
+                    JSONObject['EM'] = EngMan;
+                }
+                var teamLead = document.getElementById("teamLeadList").value;
+                if(teamLead) {
+                    JSONObject['TL'] = teamLead;
+                }
+                var projectManager =  document.getElementById("projectManagerList").value;
+                if(projectManager) {
+                    JSONObject['PM'] = projectManager;
+                }
+                console.log(JSONObject);
+                //console.log(JSON);
+                var result = $.ajax({
+                    url:"http://139.59.3.93:8080/teams?key=b42b5ee6-385b-11e6-ac61-9e71128cae77",
+                    type:"post",
+                    data: JSONObject,
+                    success: function (xhr, success, data) {
+                        console.log(data);
+                        alert(xhr.message);
+                    },
+                    error: function(xhr, error, data ) {
+                        console.log(xhr, error, data);
+                    }
+                });
+                $('#teamName').val('');
+                $('#pointOfContact').val('');  
             }
-        });
-        $('#teamName').val('');
-        $('#pointOfContact').val('');   
+            else {
+                alert("Invalid Email address");
+            } 
+        }
+        else {
+            var SrEngMan = document.getElementById("SrEngManList").value;
+            if(SrEngMan) {
+                JSONObject['SEM'] = SrEngMan;
+            }
+            var EngMan = document.getElementById("EngManList").value;
+            if(EngMan) {
+                JSONObject['EM'] = EngMan;
+            }
+            var teamLead = document.getElementById("teamLeadList").value;
+            if(teamLead) {
+                JSONObject['TL'] = teamLead;
+            }
+            var projectManager =  document.getElementById("projectManagerList").value;
+            if(projectManager) {
+                JSONObject['PM'] = projectManager;
+            }
+            console.log(JSONObject);
+            //console.log(JSON);
+            $.ajax({
+                url:"http://139.59.3.93:8080/teams?key=b42b5ee6-385b-11e6-ac61-9e71128cae77",
+                type:"post",
+                data: JSONObject,
+                success: function (xhr, success, data) {
+                    console.log(data);
+                    alert(xhr.message);
+                },
+                error: function(xhr, error, data ) {
+                    console.log(xhr, error, data);
+                }
+            });
+            $('#teamName').val('');
+            $('#pointOfContact').val('');  
+        }
     }
     else {
         alert('Enter Team name');
@@ -178,9 +217,10 @@ var postProfile = function() {
             url:"http://139.59.3.93:8080/employees?key=b42b5ee6-385b-11e6-ac61-9e71128cae77",
             type:"post",
             data: JSONObject,
-            success: function (xhr, error, data) {
+            success: function (xhr, success, data) {
                 //debugger
-                console.log(xhr, error, data);
+                console.log(xhr, success, data);
+                alert(xhr.message);
             },
             error: function(xhr, error, data ){
                 // debugger
@@ -200,10 +240,98 @@ var postProfile = function() {
         alert('Enter All required fields');  
     } 
 };
+//Funtion to update a team Information
+var updateTeam = function() {
+    var teamId = document.getElementById("update_teamName").value;
+    if(teamId) {
+        var JSONObject =  {
+            id: teamId
+        }
+        var pointOfContact = document.getElementById("update_pointOfContact").value;
+        if(pointOfContact) {
+            if(IsValidemail(pointOfContact)){
+                JSONObject['pointOfContact'] = pointOfContact;
+                var SrEngMan = document.getElementById("update_SrEngManList").value;
+                if(SrEngMan) {
+                    JSONObject['SEM'] = SrEngMan;
+                }
+                var EngMan = document.getElementById("update_EngManList").value;
+                if(EngMan) {
+                    JSONObject['EM'] = EngMan;
+                }
+                var teamLead = document.getElementById("update_teamLeadList").value;
+                if(teamLead) {
+                    JSONObject['TL'] = teamLead;
+                }
+                var projectManager =  document.getElementById("update_projectManagerList").value;
+                if(projectManager) {
+                    JSONObject['PM'] = projectManager;
+                }
+                console.log(JSONObject);
+                //console.log(JSON);
+                $.ajax({
+                    url:"http://139.59.3.93:8080/teams/"+teamId+"?key=b42b5ee6-385b-11e6-ac61-9e71128cae77",
+                    type:"put",
+                    data: JSONObject,
+                    success: function (xhr, success, data) {
+                        console.log(data);
+                        alert(xhr.message);
+                    },
+                    error: function(xhr, error, data ) {
+                        console.log(xhr, error, data);
+                    }
+                });
+                $('#pointOfContact').val('');   
+            }
+            else{
+                alert("Enter Valid point of contact");
+            }
+        }
+        else{
+            var SrEngMan = document.getElementById("update_SrEngManList").value;
+            if(SrEngMan) {
+                JSONObject['SEM'] = SrEngMan;
+            }
+            var EngMan = document.getElementById("update_EngManList").value;
+            if(EngMan) {
+                JSONObject['EM'] = EngMan;
+            }
+            var teamLead = document.getElementById("update_teamLeadList").value;
+            if(teamLead) {
+                JSONObject['TL'] = teamLead;
+            }
+            var projectManager =  document.getElementById("update_projectManagerList").value;
+            if(projectManager) {
+                JSONObject['PM'] = projectManager;
+            }
+            console.log(JSONObject);
+            //console.log(JSON);
+            $.ajax({
+                url:"http://139.59.3.93:8080/teams/"+teamId+"?key=b42b5ee6-385b-11e6-ac61-9e71128cae77",
+                type:"put",
+                data: JSONObject,
+                success: function (xhr, success, data) {
+                    console.log(data);
+                    alert(xhr.message);
+                },
+                error: function(xhr, error, data ) {
+                    console.log(xhr, error, data);
+                }
+            });
+            $('#pointOfContact').val('');   
+        }
+    }
+    else {
+        alert('Select Team name');
+    }   
+};
+
+/**/
 //Function to delete a particular team
 var deleteTeam = function() {
     var team2delete = document.getElementById("deleteTeamName").value;
     if(team2delete) {
+        url = "";
         $.ajax();
     }
     else {
@@ -214,6 +342,7 @@ var deleteTeam = function() {
 var deleteProfile = function() {
     var profile2delete = document.getElementById("deleteProfileName").value;
     if(profile2delete) {
+        url="";
         $.ajax();
     }
     else {
