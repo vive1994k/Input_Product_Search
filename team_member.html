@@ -112,12 +112,23 @@
 								<input type="tel" id="mobileNo" name="mobileNo" required/>
 				      		</div>
 				      		<div class="form-group">
-								<label for="empteamName">Team:<sup>*</sup></label>
-								<input type="text" id="empteamName" name="empteamName" required/>
+								<label for="empteamName">Team:<sup>*</sup> </label>
+								<select id="empteamName" >
+									<option value="">Select Your Team</option>
+								</select>
 				      		</div>
 				      		<div class="form-group">
-								<label for="Erole">Role:</label>
-								<input type="text" id="Erole" name="Erole" required/>
+								<label for="Erole">Role:<sup>*</sup> </label>
+								<select id="Erole" >
+									<option value="">Select Role</option>
+									<option value="SE">SE</option>
+									<option value="SSE">SSE</option>
+									<option value="QA">QA</option>
+									<option value="PM">PM</option>
+									<option value="TL">TL</option>
+									<option value="EM">EM</option>
+									<option value="SEM">SEM</option>
+								</select>
 				      		</div>
 				      		<div class="form-group">
 				      			<label for="Eremarks">About Me:</label>
@@ -141,8 +152,60 @@
 		<div>
 			<button type="button" class="btn btn-info btn-md" data-toggle="modal" data-target="#deleteTeam">Delete Team</button>
 		</div>
+		<!-- Modal For team deletion purpose -->
+		<div id="deleteTeam" class="modal fade" role="dialog">
+		  	<div class="modal-dialog">
+			    <!-- Modal content-->
+			    <div class="modal-content">
+			    	<form id="deleteteamForm" action="" method="DELETE">
+				      	<div class="modal-header">
+				        	<button type="button" class="close" data-dismiss="modal">&times;</button>
+				        	<h4 class="modal-title">Delete Team</h4>
+				      	</div>
+				      	<div class="modal-body">
+				      		<div class="form-group">
+								<label for="deleteTeamName">Select the team to delete:</label>
+								<select id="deleteTeamName" >
+									<option value="">Select Team</option>
+								</select>
+				      		</div>
+						</div>
+					    <div class="modal-footer">
+					        <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+					        <button type="button" value=" Send" class="btn btn-success" onclick="deleteTeam()">Submit</button>
+					    </div>
+				    </form>
+			    </div>
+		  	</div>
+		</div>
 		<div>
 			<button type="button" class="btn btn-info btn-md" data-toggle="modal" data-target="#deleteProfile">Delete Profile</button>
+		</div>
+		<!-- Modal For profile deletion purpose -->
+		<div id="deleteProfile" class="modal fade" role="dialog">
+		  	<div class="modal-dialog">
+			    <!-- Modal content-->
+			    <div class="modal-content">
+			    	<form id="deleteProfileForm" action="" method="DELETE">
+				      	<div class="modal-header">
+				        	<button type="button" class="close" data-dismiss="modal">&times;</button>
+				        	<h4 class="modal-title">Delete Profile</h4>
+				      	</div>
+				      	<div class="modal-body">
+				      		<div class="form-group">
+								<label for="deleteProfileName">Select the Profile to delete:</label>
+								<select id="deleteProfileName" >
+									<option value="">Select Profile</option>
+								</select>
+				      		</div>
+						</div>
+					    <div class="modal-footer">
+					        <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+					        <button type="button" value=" Send" class="btn btn-success" onclick="deleteProfile()">Submit</button>
+					    </div>
+				    </form>
+			    </div>
+		  	</div>
 		</div>
 	</div>
 </body>

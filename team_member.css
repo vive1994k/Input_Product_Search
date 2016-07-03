@@ -18,7 +18,7 @@
     margin-bottom: 10px;
     width: 150px;
 }
-#TeamList, #EngManList, #SrEngManList, #teamLeadList, #projectManagerList{
+#TeamList, #EngManList, #SrEngManList, #teamLeadList, #projectManagerList, #deleteTeamName, #deleteProfileName, #Erole, #empteamName {
     -webkit-appearance: button;
     text-transform: uppercase;
     width: 220px;
