@@ -5,19 +5,22 @@
     float:left;
     padding:3px;
 }
+.container-fluid{
+    background: gray;
+}
 .form-group input {
     height:20px; 
     width:220px; 
     padding:5px 8px;
 }
 .btn {
-	margin-top: 10px;
-	margin-bottom: 10px;
+    margin-top: 10px;
+    margin-bottom: 10px;
     width: 150px;
 }
-#TeamList {
-	-webkit-appearance: button;
-	text-transform: uppercase;
-	width: 100px;
-	height: 30px;
+#TeamList, #EngManList, #SrEngManList, #teamLeadList, #projectManagerList{
+    -webkit-appearance: button;
+    text-transform: uppercase;
+    width: 220px;
+    height: 30px;
 }
