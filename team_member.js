@@ -33,7 +33,7 @@ var IsValidemail = function(email){
 };
 //Getting List of teams And Updating List of teams
 $(document).ready(function(){
-    var url = "http://139.59.3.93:8080/teams?key=b42b5ee6-385b-11e6-ac61-9e71128cae77";
+    var url = "http://139.59.3.93/teams?key=b42b5ee6-385b-11e6-ac61-9e71128cae77";
     $.ajax({
         url: url,
         type: 'get',
@@ -58,7 +58,7 @@ $(document).ready(function(){
 });
 //Get Profiles with roles
 $(document).ready(function(){
-    var url = "http://139.59.3.93:8080/employees?key=b42b5ee6-385b-11e6-ac61-9e71128cae77";
+    var url = "http://139.59.3.93/employees?key=b42b5ee6-385b-11e6-ac61-9e71128cae77";
     $.ajax({
         url: url,
         type: 'get',
@@ -135,7 +135,7 @@ var postTeam = function() {
             console.log(JSONObject);
             //console.log(JSON);
             $.ajax({
-                url:"http://139.59.3.93:8080/teams?key=b42b5ee6-385b-11e6-ac61-9e71128cae77",
+                url:"http://139.59.3.93/teams?key=b42b5ee6-385b-11e6-ac61-9e71128cae77",
                 type:"post",
                 data: JSONObject,
                 success: function (xhr, success, data) {
@@ -186,7 +186,7 @@ var postProfile = function() {
             }
             console.log(JSONObject);
             var result = $.ajax({
-                url:"http://139.59.3.93:8080/employees?key=b42b5ee6-385b-11e6-ac61-9e71128cae77",
+                url:"http://139.59.3.93/employees?key=b42b5ee6-385b-11e6-ac61-9e71128cae77",
                 type:"post",
                 data: JSONObject,
                 success: function (xhr, success, data) {
@@ -207,7 +207,7 @@ var postProfile = function() {
 //Function to help update team
 var getTeamDetails = function(){
     var teamId = document.getElementById("update_teamName").value;
-    var url = "http://139.59.3.93:8080/teams/" + teamId + "?key=b42b5ee6-385b-11e6-ac61-9e71128cae77";
+    var url = "http://139.59.3.93/teams/" + teamId + "?key=b42b5ee6-385b-11e6-ac61-9e71128cae77";
     $.ajax({
         url: url,
         type: 'get',
@@ -258,7 +258,7 @@ var updateTeam = function() {
         }
         if(emailflag){
             $.ajax({
-                url:"http://139.59.3.93:8080/teams/"+teamId+"?key=b42b5ee6-385b-11e6-ac61-9e71128cae77",
+                url:"http://139.59.3.93/teams/"+teamId+"?key=b42b5ee6-385b-11e6-ac61-9e71128cae77",
                 type:"put",
                 data: JSONObject,
                 success: function (xhr, success, data) {
@@ -280,7 +280,7 @@ var updateTeam = function() {
 //Function to help update profile
 var getemployeeDetails = function(){
     var employeeId = document.getElementById("update_empId").value;
-    var url = "http://139.59.3.93:8080/employees/" + employeeId + "?key=b42b5ee6-385b-11e6-ac61-9e71128cae77";
+    var url = "http://139.59.3.93/employees/" + employeeId + "?key=b42b5ee6-385b-11e6-ac61-9e71128cae77";
     $.ajax({
         url: url,
         type: 'get',
@@ -351,7 +351,7 @@ var updateProfile = function(){
             }
         }
         if(validationflag) {
-            var url = "http://139.59.3.93:8080/employees/" + employeeId + "?key=b42b5ee6-385b-11e6-ac61-9e71128cae77"
+            var url = "http://139.59.3.93/employees/" + employeeId + "?key=b42b5ee6-385b-11e6-ac61-9e71128cae77"
             $.ajax({
                 url: url,
                 type: 'put',
