@@ -18,9 +18,10 @@
     margin-bottom: 10px;
     width: 150px;
 }
-#TeamList, #EngManList, #SrEngManList, #teamLeadList, #projectManagerList, #deleteTeamName, #deleteProfileName, #Erole, #empteamName, #update_teamName, #update_TeamList, #update_EngManList, #update_SrEngManList, #update_teamLeadList, #update_projectManagerList {
+select {
     -webkit-appearance: button;
     text-transform: uppercase;
     width: 220px;
     height: 30px;
+    text-align: center;
 }
