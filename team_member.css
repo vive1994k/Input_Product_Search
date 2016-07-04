@@ -6,7 +6,8 @@
     padding:3px;
 }
 .container-fluid{
-    background: gray;
+    background: #49659f;
+    margin-bottom: 10px;   
 }
 .form-group input {
     height:20px; 
